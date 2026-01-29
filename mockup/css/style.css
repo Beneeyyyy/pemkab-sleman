@@ -360,7 +360,14 @@ header {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
   display: flex;
+  display: flex;
   flex-direction: column;
+}
+
+.stream-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 5px; /* Prevent scrollbar overlapping content */
 }
 
 .stream-item {
