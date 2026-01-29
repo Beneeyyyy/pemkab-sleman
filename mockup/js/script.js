@@ -48,6 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("current-date").innerText =
     new Date().toLocaleDateString("id-ID", options);
 
+  initMap(); // Initialize Map
+
   // Main Chart
   const ctx = document.getElementById("mainChart").getContext("2d");
   const gradientPos = ctx.createLinearGradient(0, 0, 0, 400);
@@ -199,3 +201,58 @@ function generateReport(type) {
     alert("Generating report... Download will start automatically.");
   }
 }
+
+// Heatmap Initialization
+function initMap() {
+    // Coordinates for Sleman Regency
+    const slemanCoords = [-7.712, 110.355];
+    const map = L.map('map', {
+        zoomControl: false // Cleaner look
+    }).setView(slemanCoords, 11);
+
+    // Using CartoDB Positron for a clean, professional look that fits the theme
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+    }).addTo(map);
+
+    // Add zoomed control to top right
+    L.control.zoom({
+        position: 'topright'
+    }).addTo(map);
+
+    // Simulate "Heatmap" data points (Clusters)
+    const heatPoints = [
+        { coords: [-7.76, 110.37], color: '#EF4444', radius: 1500, label: 'High Alert: RSUD' }, // Red (Bad)
+        { coords: [-7.70, 110.40], color: '#F59E0B', radius: 1200, label: 'Warning: Traffic' }, // Orange (Warning)
+        { coords: [-7.68, 110.34], color: '#10B981', radius: 1000, label: 'Safe: Kaliurang' }, // Green (Good)
+        { coords: [-7.75, 110.28], color: '#3B82F6', radius: 800,  label: 'Info: New Project' }  // Blue (Info)
+    ];
+
+    heatPoints.forEach(point => {
+        L.circle(point.coords, {
+            color: point.color,
+            fillColor: point.color,
+            fillOpacity: 0.5,
+            radius: point.radius,
+            stroke: false
+        }).addTo(map)
+        .bindPopup(`<b>${point.label}</b><br>Radius: ${point.radius}m`);
+    });
+}
+
+// Ensure map is resized when tab switches to dashboard (if it was hidden)
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.target.id === 'dashboard' && mutation.target.classList.contains('active')) {
+            setTimeout(() => {
+                const mapContainer = document.getElementById('map');
+                if (mapContainer) {
+                   window.dispatchEvent(new Event('resize')); 
+                }
+            }, 100);
+        }
+    });
+});
+observer.observe(document.getElementById('dashboard'), { attributes: true, attributeFilter: ['class'] });
