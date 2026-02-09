@@ -1,0 +1,92 @@
+/* Layout 2 Kolom (Feed 65%, Sidebar 35%) */
+.sentiment-main-layout {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    /* Memastikan kolom kanan tidak sempit */
+    gap: 24px;
+    align-items: start;
+}
+
+.filter-row {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.search-box {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    border-radius: 8px;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    padding: 12px;
+    width: 100%;
+    outline: none;
+}
+
+.sentiment-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.sentiment-mini-card {
+    padding: 24px;
+    text-align: center;
+    border-radius: 12px;
+}
+
+.mini-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.mini-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-main);
+}
+
+.sidebar-card {
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* Post Styling sesuai image_8472a2.png */
+.post-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    position: relative;
+    transition: var(--transition-speed);
+}
+
+.post-card:hover {
+    border-color: var(--primary-color);
+}
+
+.sentiment-badge {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+}

@@ -1,5 +1,30 @@
 <!doctype html>
 <html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sleman Smart Regency - Command Center</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboardUtama.css" />
+  <link rel="stylesheet" href="css/monitoringSentimen.css" />
+  <link rel="stylesheet" href="css/monitoringIssue.css" />
+  <link rel="stylesheet" href="css/petaVisualisasi.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="icon" href="assets/logo.jpg" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside>
+    <div class="logo">
+      <img src="assets/logo.jpg" alt="PemKab Sleman Logo" />
+      <div class="logo-text">
+        <div style="font-size: 1.2rem; font-weight: 800; line-height: 1.1">
+          PEMKAB<br />SLEMAN
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -173,70 +198,93 @@
           <i class="fa-solid fa-file-pdf"></i>
           <span>Executive Reports</span>
         </div>
-      </nav>
-      
-      <nav id="pic-nav" style="display: none;">
-        <div class="nav-item active" onclick="switchView('inbox')">
-          <i class="fa-solid fa-inbox"></i>
-          <span>Pesan Masuk</span>
+        <div style="font-size: 0.9rem; font-weight: 400; color: #e0f2fe">
+          Command Center
         </div>
-      </nav>
+      </div>
+    </div>
 
-      <div
-        style="
+    <!-- Sidebar -->
+    <nav id="admin-nav">
+      <div class="nav-item active" onclick="switchView('dashboard')">
+        <i class="fa-solid fa-table-cells-large"></i> <span>Dashboard Utama</span>
+      </div>
+
+      <div class="nav-item" onclick="switchView('sentiment')">
+        <i class="fa-regular fa-comment"></i> <span>Monitoring Sentimen</span>
+      </div>
+
+      <div class="nav-item" onclick="switchView('issue-management')">
+        <i class="fa-solid fa-triangle-exclamation"></i> <span>Manajemen Isu</span>
+      </div>
+
+      <div class="nav-item" onclick="switchView('map-visualization')">
+        <i class="fa-solid fa-map"></i> <span>Peta Visualisasi</span>
+      </div>
+
+      <div class="nav-item" onclick="switchView('warning')">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Early Warning</span>
+      </div>
+
+      <div class="nav-item" onclick="switchView('optimizer')">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span>Public Comm. AI</span>
+      </div>
+      <div class="nav-item" onclick="switchView('accounts')">
+        <i class="fa-brands fa-tiktok"></i>
+        <span>KOL Watchlist</span>
+      </div>
+      <div class="nav-item" onclick="switchView('reports')">
+        <i class="fa-solid fa-file-pdf"></i>
+        <span>Executive Reports</span>
+      </div>
+    </nav>
+
+    <nav id="pic-nav" style="display: none;">
+      <div class="nav-item active" onclick="switchView('inbox')">
+        <i class="fa-solid fa-inbox"></i>
+        <span>Pesan Masuk</span>
+      </div>
+    </nav>
+
+    <div style="
           margin-top: auto;
           padding-top: 20px;
           border-top: 1px solid rgba(0, 0, 0, 0.1);
-        "
-      >
-        <div class="nav-item" onclick="window.location.href = 'index.html'">
-          <i class="fa-solid fa-power-off"></i>
-          <span>Logout System</span>
+        ">
+      <div class="nav-item" onclick="window.location.href = 'index.html'">
+        <i class="fa-solid fa-power-off"></i>
+        <span>Logout System</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main>
+    <header>
+      <div style="display: flex; flex-direction: column">
+        <h2 id="page-title" style="font-size: 1.2rem; font-weight: 800; color: #ffffff">
+          Dashboard Utama
+        </h2>
+        <span id="current-date" style="font-size: 0.8rem; color: #e0f2fe; font-weight: 500"></span>
+      </div>
+
+      <div class="ticker-wrap">
+        <div class="ticker">
+          <span><i class="fa-solid fa-arrow-trend-up text-success"></i> Trending:
+            #WisataKaliurang (High Vol)</span>
+          <span><i class="fa-solid fa-arrow-trend-up text-success"></i> Trending:
+            #SlemanSembada (Medium Vol)</span>
+          <span><i class="fa-solid fa-bolt text-danger"></i> Alert: Status Merapi
+            Waspada Level 3</span>
+          <span><i class="fa-solid fa-trophy text-primary"></i> Achievement:
+            Indeks Kepuasan Masyarakat 89.5%</span>
         </div>
       </div>
-    </aside>
 
-    <!-- Main Content -->
-    <main>
-      <header>
-        <div style="display: flex; flex-direction: column">
-          <h2
-            id="page-title"
-            style="font-size: 1.2rem; font-weight: 800; color: #ffffff"
-          >
-            Situation Room
-          </h2>
-          <span
-            id="current-date"
-            style="font-size: 0.8rem; color: #e0f2fe; font-weight: 500"
-          ></span>
-        </div>
-
-        <div class="ticker-wrap">
-          <div class="ticker">
-            <span
-              ><i class="fa-solid fa-arrow-trend-up text-success"></i> Trending:
-              #WisataKaliurang (High Vol)</span
-            >
-            <span
-              ><i class="fa-solid fa-arrow-trend-up text-success"></i> Trending:
-              #SlemanSembada (Medium Vol)</span
-            >
-            <span
-              ><i class="fa-solid fa-bolt text-danger"></i> Alert: Status Merapi
-              Waspada Level 3</span
-            >
-            <span
-              ><i class="fa-solid fa-trophy text-primary"></i> Achievement:
-              Indeks Kepuasan Masyarakat 89.5%</span
-            >
-          </div>
-        </div>
-
-        <div class="user-profile">
-          <button
-            onclick="window.open('warroom-v2.html', '_blank')"
-            style="
+      <div class="user-profile">
+        <button onclick="window.open('warroom-v2.html', '_blank')" style="
               background: #000;
               color: #ecfdf5;
               border: none;
@@ -246,344 +294,465 @@
               cursor: pointer;
               margin-right: 15px;
               font-size: 0.8rem;
-            "
-          >
-            <i class="fa-solid fa-display"></i> WAR ROOM
-          </button>
-          <div style="text-align: right">
-            <div style="font-weight: 700; font-size: 0.9rem; color: #ffffff">
-              Admin Pusat
-            </div>
-            <div style="font-size: 0.75rem; color: #e0f2fe">
-              Diskominfo Team (v2.1)
-            </div>
+            ">
+          <i class="fa-solid fa-display"></i> WAR ROOM
+        </button>
+        <div style="text-align: right">
+          <div style="font-weight: 700; font-size: 0.9rem; color: #ffffff">
+            Admin Pusat
           </div>
-          <div class="avatar">
-            <img src="assets/logo.jpg" style="width: 25px" />
+          <div style="font-size: 0.75rem; color: #e0f2fe">
+            Diskominfo Team (v2.1)
           </div>
         </div>
-      </header>
+        <div class="avatar">
+          <img src="assets/logo.jpg" style="width: 25px" />
+        </div>
+      </div>
+    </header>
 
-      <div class="content-area">
-        <!-- Dashboard View -->
-        <section id="dashboard" class="view-section active">
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-label">Total Mention (24h)</div>
-              <div class="stat-value">15,420</div>
-              <div class="stat-trend text-success">
-                <i class="fa-solid fa-arrow-up"></i> 12% vs yesterday
-              </div>
-            </div>
-            <div class="stat-card positive">
-              <div class="stat-label">Sentiment Score</div>
-              <div class="stat-value text-success">68/100</div>
-              <div class="stat-trend text-muted">Aman Terkendali</div>
-            </div>
-            <div class="stat-card warning">
-              <div class="stat-label">Potential Reach</div>
-              <div class="stat-value">2.5M</div>
-              <div class="stat-trend text-primary">
-                <i class="fa-solid fa-eye"></i> High Visibility
-              </div>
-            </div>
-            <div class="stat-card negative">
-              <div class="stat-label">Crisis Probability</div>
-              <div class="stat-value text-danger">High</div>
-              <div class="stat-trend text-danger">
-                <i class="fa-solid fa-fire"></i> Isu Viral Detected
-              </div>
+    <div class="content-area">
+      <!-- Dashboard Utama View -->
+      <section id="dashboard" class="view-section active">
+        <div class="stats-grid">
+          <div class="stat-card animate-up" style="animation-delay: 0.1s">
+            <div class="stat-label">Total Mention (24h)</div>
+            <div class="stat-value">468</div>
+            <div class="stat-trend text-success">
+              <i class="fa-solid fa-arrow-up"></i> 15.3%
             </div>
           </div>
 
-          <div class="dashboard-main">
-            <div
-              class="chart-container"
-              style="height: 400px; position: relative"
-            >
-              <div class="flex-between" style="margin-bottom: 20px">
-                <h3 style="font-size: 1rem; color: #1a1a1a">
-                  Real-time Sentinel Overview
-                </h3>
-                <div style="font-size: 0.8rem; display: flex; gap: 10px">
-                  <span style="display: flex; align-items: center; gap: 5px"
-                    ><div
-                      style="
-                        width: 10px;
-                        height: 10px;
-                        background: #10b981;
-                        border-radius: 2px;
-                      "
-                    ></div>
-                    Positif</span
-                  >
-                  <span style="display: flex; align-items: center; gap: 5px"
-                    ><div
-                      style="
-                        width: 10px;
-                        height: 10px;
-                        background: #ef4444;
-                        border-radius: 2px;
-                      "
-                    ></div>
-                    Negatif</span
-                  >
-                </div>
-              </div>
-              <div style="height: 300px; width: 100%">
-                <canvas id="mainChart"></canvas>
-              </div>
+          <div class="stat-card warning animate-up" style="animation-delay: 0.2s">
+            <div class="stat-label">Isu Aktif</div>
+            <div class="stat-value">5</div>
+            <div class="stat-trend">
+              <i class="fa-solid fa-triangle-exclamation"></i> 1 Critical
+            </div>
+          </div>
+
+          <div class="stat-card positive animate-up" style="animation-delay: 0.3s">
+            <div class="stat-label">Terselesaikan</div>
+            <div class="stat-value">1</div>
+            <div class="stat-trend">
+              <i class="fa-solid fa-check-double"></i> +8.5%
+            </div>
+          </div>
+
+          <div class="stat-card negative animate-up" style="animation-delay: 0.4s">
+            <div class="stat-label">Alert Baru</div>
+            <div class="stat-value">2</div>
+            <div class="stat-trend">
+              <i class="fa-regular fa-clock"></i> Urgent
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid-container">
+          <div class="chart-container animate-up" style="animation-delay: 0.5s">
+            <h3 class="stat-label" style="margin-bottom: 20px;">Distribusi Sentimen</h3>
+            <div style="height: 300px;">
+              <canvas id="sentimentChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-container animate-up" style="animation-delay: 0.6s">
+            <h3 class="stat-label" style="margin-bottom: 20px;">Trend Mention (7 Hari)</h3>
+            <div style="height: 300px;">
+              <canvas id="trendChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-container animate-up" style="animation-delay: 0.7s">
+            <h3 class="stat-label" style="margin-bottom: 20px;">Kategori Isu Terbanyak</h3>
+            <div style="height: 300px;">
+              <canvas id="categoryChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-container animate-up" style="animation-delay: 0.8s">
+            <h3 class="stat-label" style="margin-bottom: 20px;">Top Keywords</h3>
+            <div id="keyword-list">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Monitoring Sentiment View -->
+      <section id="sentiment" class="view-section active">
+        <div class="sentiment-header animate-up" style="animation-delay: 0.1s;">
+          <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--text-main);">Social Media Sentiment Monitoring
+          </h2>
+          <p class="text-muted" style="margin-top: 4px;">Monitoring real-time media sosial dan analisis sentimen</p>
+        </div>
+
+        <div class="filter-row animate-up" style="animation-delay: 0.2s;">
+          <div class="search-box glass">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search-filter" placeholder="Cari keyword, hashtag, atau akun...">
+          </div>
+          <select id="platform-filter" class="form-select glass">
+            <option value="all">Semua Platform</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Tiktok">Tiktok</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Youtube">Youtube</option>
+            <option value="Portal Berita">Portal Berita</option>
+          </select>
+          <select id="sentiment-filter" class="form-select glass">
+            <option value="all">Semua Sentimen</option>
+            <option value="Positif">Positif</option>
+            <option value="Netral">Netral</option>
+            <option value="Negatif">Negatif</option>
+          </select>
+        </div>
+
+        <div class="sentiment-stats-grid animate-up" style="animation-delay: 0.3s;">
+          <div class="sentiment-mini-card glass">
+            <div class="mini-label">Total Posts</div>
+            <div class="mini-value">5</div>
+          </div>
+          <div class="sentiment-mini-card glass">
+            <div class="mini-label">Avg Engagement</div>
+            <div class="mini-value">1195</div>
+          </div>
+          <div class="sentiment-mini-card glass">
+            <div class="mini-label">Top Platform</div>
+            <div class="mini-value">TikTok</div>
+          </div>
+          <div class="sentiment-mini-card glass">
+            <div class="mini-label">Reach Estimate</div>
+            <div class="mini-value">128K</div>
+          </div>
+        </div>
+
+        <div class="sentiment-main-layout">
+          <div class="feed-column">
+            <h3 class="section-title">Live Feed</h3>
+            <div id="live-feed-render-area">
+            </div>
+          </div>
+
+          <div class="sidebar-column">
+            <div class="sidebar-card glass animate-up" style="animation-delay: 0.5s;">
+              <h3 class="section-title">Opinion Leaders</h3>
+              <div id="leaders-render-area"></div>
             </div>
 
-            <div class="live-stream">
-              <h3 style="font-size: 1rem; margin-bottom: 10px; color: #1a1a1a">
-                Live Monitor
+            <div class="sidebar-card glass animate-up" style="animation-delay: 0.6s; margin-top: 24px;">
+              <h3 class="section-title">Trending Topics</h3>
+              <div id="trending-render-area"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Monitoring Issue View -->
+      <section id="issue-management" class="view-section">
+        <div class="header-content animate-up" style="animation-delay: 0.1s;">
+          <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--text-main);">Deteksi & Manajemen Isu Publik</h2>
+          <p class="text-muted" style="margin-top: 4px;">Pengelompokan dan tracking isu publik secara real-time</p>
+        </div>
+
+        <div class="issue-stats-grid animate-up" style="animation-delay: 0.2s;">
+          <div class="issue-mini-card glass">
+            <div class="mini-label">Total Isu</div>
+            <div class="mini-value">5</div>
+          </div>
+          <div class="issue-mini-card glass">
+            <div class="mini-label">Open</div>
+            <div class="mini-value text-danger">2</div>
+          </div>
+          <div class="issue-mini-card glass">
+            <div class="mini-label">On Progress</div>
+            <div class="mini-value text-warning">2</div>
+          </div>
+          <div class="issue-mini-card glass">
+            <div class="mini-label">Resolved</div>
+            <div class="mini-value text-success">1</div>
+          </div>
+          <div class="issue-mini-card glass">
+            <div class="mini-label">Critical</div>
+            <div class="mini-value text-danger">1</div>
+          </div>
+        </div>
+
+        <div class="filter-tab-container animate-up" style="animation-delay: 0.3s;">
+          <div class="tab-scroll">
+            <button class="tab-btn active" data-status="all">Semua</button>
+            <button class="tab-btn" data-status="Open">Open</button>
+            <button class="tab-btn" data-status="On Progress">Progress</button>
+            <button class="tab-btn" data-status="Resolved">Resolved</button>
+            <button class="tab-btn" data-status="Closed">Closed</button>
+          </div>
+        </div>
+
+        <div id="issue-list-container">
+        </div>
+
+        <div class="category-summary-section animate-up" style="animation-delay: 0.5s;">
+          <h3 class="section-title">Ringkasan per Kategori</h3>
+          <div class="category-grid">
+            <div class="cat-card cat-jalan"><span>Infrastruktur Jalan</span> <strong>2</strong></div>
+            <div class="cat-card cat-air"><span>Air & Sanitasi</span> <strong>1</strong></div>
+            <div class="cat-card cat-listrik"><span>Infrastruktur Listrik</span> <strong>1</strong></div>
+            <div class="cat-card cat-bencana"><span>Bencana & Lingkungan</span> <strong>1</strong></div>
+            <div class="cat-card cat-kesehatan"><span>Kesehatan</span> <strong>1</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Peta Visualisasi View -->
+      <section id="map-visualization" class="view-section">
+        <div class="header-content">
+          <h2 style="font-size: 1.5rem; font-weight: 700; color: #1e293b;">Peta Visualisasi Isu</h2>
+          <p class="text-muted">Geo-spatial dashboard isu publik Kabupaten Sleman</p>
+        </div>
+
+        <div class="filter-action-bar glass">
+          <div class="filter-group">
+            <div class="custom-select-wrapper">
+              <i class="fa-solid fa-layer-group icon-muted"></i>
+              <select class="minimal-select">
+                <option value="semua">Semua Kategori</option>
+                <option value="infra">Infrastruktur</option>
+                <option value="kesehatan">Kesehatan</option>
+              </select>
+              <i class="fa-solid fa-chevron-down chevron-icon"></i>
+            </div>
+
+            <div class="custom-select-wrapper">
+              <i class="fa-solid fa-calendar-alt icon-muted"></i>
+              <select class="minimal-select">
+                <option value="hari-ini">Hari Ini</option>
+                <option value="minggu-ini">Minggu Ini</option>
+              </select>
+              <i class="fa-solid fa-chevron-down chevron-icon"></i>
+            </div>
+          </div>
+
+          <div class="toggle-group">
+            <span class="heatmap-label">Heatmap Mode:</span>
+            <label class="ios-switch">
+              <input type="checkbox" id="heatmap-toggle">
+              <span class="ios-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="map-grid-layout">
+          <div class="map-view-container glass">
+            <div class="map-overlay-info">
+              <div style="font-weight: 700; font-size: 0.9rem;">Kabupaten Sleman</div>
+              <div style="font-size: 0.75rem; color: #64748b;">5 Isu Aktif</div>
+            </div>
+
+            <div class="map-legend-box">
+              <div style="font-weight: 700; font-size: 0.75rem; margin-bottom: 8px;">Legend</div>
+              <div class="legend-item"><span class="dot" style="background:#3b82f6;"></span> Low</div>
+              <div class="legend-item"><span class="dot" style="background:#f59e0b;"></span> Medium</div>
+              <div class="legend-item"><span class="dot" style="background:#f97316;"></span> High</div>
+              <div class="legend-item"><span class="dot" style="background:#ef4444;"></span> Critical</div>
+            </div>
+
+            <div id="map-canvas">
+              <div class="district-text" style="top: 15%; left: 45%;">CANGKRINGAN</div>
+              <div class="district-text" style="top: 35%; left: 40%;">NGAGLIK</div>
+              <div class="district-text" style="top: 60%; left: 20%;">MLATI</div>
+              <div class="district-text" style="top: 70%; left: 40%;">DEPOK</div>
+              <div class="district-text" style="top: 80%; left: 55%;">BERBAH</div>
+
+              <div id="marker-layer"></div>
+            </div>
+          </div>
+
+          <div class="map-sidebar-list glass">
+            <h3 style="font-size: 0.95rem; margin-bottom: 15px; padding: 0 5px;">Daftar Isu (5)</h3>
+            <div id="side-issue-render" class="custom-scrollbar">
+            </div>
+          </div>
+        </div>
+
+        <div class="district-stat-container">
+          <h3 style="font-size: 1rem; margin-bottom: 15px;">Statistik per Kecamatan</h3>
+          <div id="district-stat-grid">
+          </div>
+        </div>
+      </section>
+
+      <!-- Regional Intel View (New) -->
+      <section id="competitor" class="view-section">
+        <div class="dashboard-main" style="grid-template-rows: auto">
+          <div class="chart-container" style="grid-column: 1 / 3; height: 400px; position: relative">
+            <div class="flex-between" style="margin-bottom: 20px">
+              <h3 style="font-size: 1.1rem; color: #1a1a1a">
+                Regional Comparative Analysis
               </h3>
-              <div class="stream-list" id="streamList"></div>
+              <select class="form-select" style="width: 150px">
+                <option>Sleman</option>
+                <option>Bantul</option>
+                <option>Kota Yogyakarta</option>
+                <option>Kulon Progo</option>
+                <option>Gunungkidul</option>
+              </select>
             </div>
-
-            <div class="map-container">
-              <h3
-                style="
-                  font-size: 1rem;
-                  position: absolute;
-                  top: 20px;
-                  left: 20px;
-                  z-index: 2;
-                  color: #1a1a1a;
-                "
-              >
-                Regional Heatmap
-              </h3>
-              <div
-                id="map"
-                style="
-                  width: 100%;
-                  height: 100%;
-                  border-radius: 12px;
-                  z-index: 1;
-                "
-              ></div>
+            <div style="height: 300px; width: 100%">
+              <canvas id="competitorChart"></canvas>
             </div>
           </div>
-        </section>
-
-        <!-- Regional Intel View (New) -->
-        <section id="competitor" class="view-section">
-          <div class="dashboard-main" style="grid-template-rows: auto">
-            <div
-              class="chart-container"
-              style="grid-column: 1 / 3; height: 400px; position: relative"
-            >
-              <div class="flex-between" style="margin-bottom: 20px">
-                <h3 style="font-size: 1.1rem; color: #1a1a1a">
-                  Regional Comparative Analysis
-                </h3>
-                <select class="form-select" style="width: 150px">
-                  <option>Sleman</option>
-                  <option>Bantul</option>
-                  <option>Kota Yogyakarta</option>
-                  <option>Kulon Progo</option>
-                  <option>Gunungkidul</option>
-                </select>
-              </div>
-              <div style="height: 300px; width: 100%">
-                <canvas id="competitorChart"></canvas>
-              </div>
-            </div>
-          </div>
-          <div
-            style="
+        </div>
+        <div style="
               display: grid;
               grid-template-columns: 1fr 1fr 1fr;
               gap: 20px;
               margin-top: 24px;
-            "
-          >
-            <div class="stat-card" style="border-top: 4px solid #2563eb">
-              <div class="stat-label">Kab. Sleman (Kita)</div>
-              <div class="stat-value">34.2%</div>
-              <div class="stat-trend text-success">
-                <i class="fa-solid fa-caret-up"></i> +1.5%
-              </div>
-            </div>
-            <div class="stat-card" style="border-top: 4px solid #1e40af">
-              <div class="stat-label">Kab. Bantul</div>
-              <div class="stat-value">28.1%</div>
-              <div class="stat-trend text-danger">
-                <i class="fa-solid fa-caret-down"></i> -0.8%
-              </div>
-            </div>
-            <div class="stat-card" style="border-top: 4px solid #f59e0b">
-              <div class="stat-label">Kab. Gunungkidul</div>
-              <div class="stat-value">18.5%</div>
-              <div class="stat-trend text-muted">
-                <i class="fa-solid fa-minus"></i> 0.0%
-              </div>
+            ">
+          <div class="stat-card" style="border-top: 4px solid #2563eb">
+            <div class="stat-label">Kab. Sleman (Kita)</div>
+            <div class="stat-value">34.2%</div>
+            <div class="stat-trend text-success">
+              <i class="fa-solid fa-caret-up"></i> +1.5%
             </div>
           </div>
-        </section>
+          <div class="stat-card" style="border-top: 4px solid #1e40af">
+            <div class="stat-label">Kab. Bantul</div>
+            <div class="stat-value">28.1%</div>
+            <div class="stat-trend text-danger">
+              <i class="fa-solid fa-caret-down"></i> -0.8%
+            </div>
+          </div>
+          <div class="stat-card" style="border-top: 4px solid #f59e0b">
+            <div class="stat-label">Kab. Gunungkidul</div>
+            <div class="stat-value">18.5%</div>
+            <div class="stat-trend text-muted">
+              <i class="fa-solid fa-minus"></i> 0.0%
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <!-- Early Warning View (Enhanced) -->
-        <section id="warning" class="view-section">
-          <div class="glass" style="padding: 30px; border-radius: 16px">
-            <!-- Viral Detection Header -->
-            <div class="flex-between" style="margin-bottom: 30px">
-              <div>
-                <h2 style="font-size: 1.5rem; margin-bottom: 5px; color: #1a1a1a">
-                  <i class="fa-solid fa-virus-covid text-danger"></i> Viral Content Detection
-                </h2>
-                <div class="text-warning" style="font-size: 0.9rem">
-                  <i class="fa-solid fa-circle-exclamation"></i> 
-                  <span id="viral-status">Monitoring 247 konten dengan keyword "sleman"</span>
-                </div>
+      <!-- Early Warning View (Enhanced) -->
+      <section id="warning" class="view-section">
+        <div class="glass" style="padding: 30px; border-radius: 16px">
+          <div class="flex-between" style="margin-bottom: 30px">
+            <div>
+              <h2 style="font-size: 1.5rem; margin-bottom: 5px; color: #1a1a1a">
+                Alert: Lonjakan Pasien RSUD
+              </h2>
+              <div class="text-danger" style="font-size: 0.9rem">
+                <i class="fa-solid fa-circle-exclamation"></i> Critical Alert
+                • Detected 2 hours ago
               </div>
-              <div style="display: flex; gap: 10px">
-                <button class="btn-generate" onclick="refreshViralDetection()" style="background: #fff; border: 1px solid #ccc; color: #333">
-                  <i class="fa-solid fa-arrows-rotate"></i> Refresh
-                </button>
-                <button class="btn-generate" onclick="switchView('optimizer')">
-                  <i class="fa-solid fa-wand-sparkles"></i> Generate Response
-                </button>
+            </div>
+            <!-- Escalation Button -->
+            <div style="display: flex; gap: 10px">
+              <button class="btn-generate" onclick="alert('Laporan diteruskan ke Dinas Kesehatan')"
+                style="background: #fff; border: 1px solid #ccc; color: #333">
+                <i class="fa-solid fa-share-nodes"></i> Eskalasi
+              </button>
+              <button class="btn-generate" onclick="switchView('optimizer')">
+                <i class="fa-solid fa-wand-sparkles"></i> Mitigasi Publik
+              </button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px">
+            <div style="
+                  background: #f8fafc;
+                  padding: 20px;
+                  border-radius: 12px;
+                  border: 1px solid #e2e8f0;
+                ">
+              <h4 style="margin-bottom: 15px">Crisis Timeline Analysis</h4>
+              <!-- Mock Timeline -->
+              <div style="
+                    border-left: 2px solid #cbd5e1;
+                    padding-left: 20px;
+                    margin-left: 10px;
+                  ">
+                <div style="margin-bottom: 20px; position: relative">
+                  <div style="
+                        position: absolute;
+                        left: -26px;
+                        width: 10px;
+                        height: 10px;
+                        background: #ef4444;
+                        border-radius: 50%;
+                      "></div>
+                  <div style="font-size: 0.8rem; color: #64748b">
+                    10:00 AM
+                  </div>
+                  <div style="font-weight: 600">
+                    Keluhan Antrian Panjang (+40%)
+                  </div>
+                </div>
+                <div style="margin-bottom: 20px; position: relative">
+                  <div style="
+                        position: absolute;
+                        left: -26px;
+                        width: 10px;
+                        height: 10px;
+                        background: #ef4444;
+                        border-radius: 50%;
+                      "></div>
+                  <div style="font-size: 0.8rem; color: #64748b">
+                    10:45 AM
+                  </div>
+                  <div style="font-weight: 600">
+                    Akun @warga_sleman memposting foto antrian RSUD
+                  </div>
+                </div>
+                <div style="margin-bottom: 0px; position: relative">
+                  <div style="
+                        position: absolute;
+                        left: -26px;
+                        width: 10px;
+                        height: 10px;
+                        background: #2563eb;
+                        border-radius: 50%;
+                      "></div>
+                  <div style="font-size: 0.8rem; color: #64748b">
+                    11:30 AM
+                  </div>
+                  <div style="font-weight: 600">System Alert Triggered</div>
+                </div>
               </div>
             </div>
 
-            <!-- Viral Metrics Overview -->
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px;">
-              <div class="viral-metric-card critical">
-                <div class="metric-icon"><i class="fa-solid fa-fire"></i></div>
-                <div class="metric-value" id="critical-count">3</div>
-                <div class="metric-label">Konten Kritis</div>
-                <div class="metric-change">+2 dalam 1 jam</div>
-              </div>
-              <div class="viral-metric-card trending">
-                <div class="metric-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <div class="metric-value" id="trending-count">12</div>
-                <div class="metric-label">Trending Now</div>
-                <div class="metric-change">#RSUDSleman viral</div>
-              </div>
-              <div class="viral-metric-card reach">
-                <div class="metric-icon"><i class="fa-solid fa-eye"></i></div>
-                <div class="metric-value" id="reach-value">1.2M</div>
-                <div class="metric-label">Potential Reach</div>
-                <div class="metric-change">+450K views</div>
-              </div>
-              <div class="viral-metric-card velocity">
-                <div class="metric-icon"><i class="fa-solid fa-rocket"></i></div>
-                <div class="metric-value" id="velocity-score">8.7</div>
-                <div class="metric-label">Viral Velocity</div>
-                <div class="metric-change">Very High</div>
-              </div>
-            </div>
+            <!-- Automated Disposisi Panel -->
+            <div style="
+                  background: #fffbe6;
+                  padding: 20px;
+                  border-radius: 12px;
+                  border: 1px solid #2563eb;
+                ">
+              <h4 style="margin-bottom: 15px; color: #1e40af">
+                <i class="fa-solid fa-gavel"></i> Automated Disposisi
+              </h4>
+              <p style="font-size: 0.9rem; margin-bottom: 15px">
+                Sistem menyarankan tindakan segera kepada:
+              </p>
 
-            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 25px; margin-bottom: 30px;">
-              <!-- Real-time Viral Feed -->
-              <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                <div class="flex-between" style="margin-bottom: 15px;">
-                  <h4 style="color: #1a1a1a; font-size: 1rem; margin: 0;">
-                    <i class="fa-solid fa-rss text-primary"></i> Live Viral Feed
-                  </h4>
-                  <div class="platform-filter">
-                    <button class="filter-btn active" data-platform="all">All</button>
-                    <button class="filter-btn" data-platform="tiktok">TikTok</button>
-                    <button class="filter-btn" data-platform="twitter">X</button>
-                    <button class="filter-btn" data-platform="instagram">IG</button>
-                  </div>
-                </div>
-                
-                <div class="viral-feed" id="viralFeed" style="max-height: 450px; overflow-y: auto;">
-                  <!-- Viral content items will be inserted here -->
-                </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 0.85rem">Penanggung Jawab</label>
+                <select class="form-select">
+                  <option selected>Kepala Dinas Kesehatan</option>
+                  <option>Humas Pemkab</option>
+                  <option>Tim Respon Cepat</option>
+                </select>
               </div>
 
-              <!-- Keyword Detection Panel -->
-              <div style="display: flex; flex-direction: column; gap: 20px;">
-                <!-- Trigger Keywords -->
-                <div style="background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                  <h4 style="margin-bottom: 15px; color: #1a1a1a;">
-                    <i class="fa-solid fa-key text-warning"></i> Trigger Keywords Detected
-                  </h4>
-                  <div class="keyword-cloud" id="keywordCloud" style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    <!-- Keywords will be inserted here -->
-                  </div>
-                </div>
-
-                <!-- Influencer Alert -->
-                <div style="background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                  <h4 style="margin-bottom: 15px; color: #1a1a1a;">
-                    <i class="fa-solid fa-user-tie text-danger"></i> High-Impact Accounts
-                  </h4>
-                  <div class="influencer-list" id="influencerList">
-                    <!-- Influencers will be inserted here -->
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Alert Escalation Matrix -->
-            <div style="background: #fffbe6; padding: 25px; border-radius: 12px; border: 2px solid #f59e0b; margin-bottom: 25px;">
-              <div class="flex-between" style="margin-bottom: 20px;">
-                <h4 style="color: #1e40af; font-size: 1.1rem; margin: 0;">
-                  <i class="fa-solid fa-exclamation-triangle"></i> Alert Escalation Matrix
-                </h4>
-                <span class="level-badge level-critical">CRITICAL LEVEL</span>
-              </div>
-              
-              <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-                <div>
-                  <label class="form-label">Detected Issue</label>
-                  <input type="text" class="form-input" id="detectedIssue" readonly value="Video viral antrian RSUD Sleman - 50K views in 2 hours">
-                </div>
-                <div>
-                  <label class="form-label">Escalation To</label>
-                  <select class="form-select" id="escalationTarget">
-                    <option value="dinkes" data-phone="0274-555-1001" data-wa="628123456001" data-email="dinkes@slemankab.go.id">Dinas Kesehatan</option>
-                    <option value="humas" data-phone="0274-555-1002" data-wa="628123456002" data-email="humas@slemankab.go.id">Humas Pemkab</option>
-                    <option value="crisis" data-phone="0274-555-1003" data-wa="628123456003" data-email="crisis@slemankab.go.id">Crisis Management</option>
-                    <option value="sekda" data-phone="0274-555-1004" data-wa="628123456004" data-email="sekda@slemankab.go.id">Sekretariat Daerah</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="form-label">Urgency Level</label>
-                  <select class="form-select" id="urgencyLevel">
-                    <option value="immediate">Immediate (15 min)</option>
-                    <option value="high">High (30 min)</option>
-                    <option value="medium">Medium (1 hour)</option>
-                  </select>
-                </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 0.85rem">Instruksi Default</label>
+                <textarea class="form-input" rows="3">
+Segera cek lapangan di RSUD Sleman. Koordinasi dengan Direktur RSUD untuk penambahan loket. Lapor progress.</textarea>
               </div>
 
-              <div id="contactInfo" style="padding: 12px; background: white; border-radius: 8px; margin-bottom: 15px; display: none;">
-                <div style="font-size: 0.85rem; color: #64748b; margin-bottom: 6px;">📞 Contact Information</div>
-                <div style="display: flex; gap: 20px; font-size: 0.85rem;">
-                  <div><strong>Phone:</strong> <span id="picPhone">-</span></div>
-                  <div><strong>WhatsApp:</strong> <span id="picWA">-</span></div>
-                  <div><strong>Email:</strong> <span id="picEmail">-</span></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <label class="form-label">Escalation Message</label>
-                <textarea class="form-input" id="escalationMessage" rows="3" placeholder="Tulis pesan atau biarkan kosong untuk auto-generate..."></textarea>
-              </div>
-              
-              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <button class="btn-generate" onclick="generateAIEscalationMessage()" style="background: #8b5cf6; color: white;">
-                  <i class="fa-solid fa-wand-magic-sparkles"></i> AI Generate
-                </button>
-                <button class="btn-generate" onclick="sendEscalation()" style="background: #dc2626; color: white;">
-                  <i class="fa-solid fa-paper-plane"></i> Send Escalation
-                </button>
-                <button class="btn-generate" onclick="sendViaWhatsApp()" style="background: #25d366; color: white;">
-                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                </button>
-                <button class="btn-generate" onclick="callPIC()" style="background: #3b82f6; color: white;">
-                  <i class="fa-solid fa-phone"></i> Call
-                </button>
-                <button class="btn-generate" onclick="viewEscalationHistory()" style="background: #6b7280; color: white;">
-                  <i class="fa-solid fa-history"></i> History
-                </button>
-              </div>
+              <button class="btn-generate" onclick="
+                    alert('Instruksi terkirim via WhatsApp & Email Secure!')
+                  " style="width: 100%; padding: 10px">
+                <i class="fa-solid fa-paper-plane"></i> Kirim Instruksi
+              </button>
             </div>
 
             <!-- Escalation Status Tracking (Separate Section) -->
@@ -597,450 +766,198 @@
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Troops Management (New) -->
-        <section id="troops" class="view-section">
-          <div class="dashboard-main">
-            <div
-              style="
+      <!-- Troops Management (New) -->
+      <section id="troops" class="view-section">
+        <div class="dashboard-main">
+          <div style="
                 grid-column: 1 / 2;
                 background: #fff;
                 padding: 24px;
                 border-radius: 12px;
                 border: 1px solid #e2e8f0;
-              "
-            >
-              <div class="flex-between" style="margin-bottom: 20px">
-                <h3 style="color: #1a1a1a">Active Missions</h3>
-                <button
-                  class="btn-generate"
-                  style="margin: 0; padding: 5px 15px; font-size: 0.8rem"
-                >
-                  + New Mission
-                </button>
-              </div>
+              ">
+            <div class="flex-between" style="margin-bottom: 20px">
+              <h3 style="color: #1a1a1a">Active Missions</h3>
+              <button class="btn-generate" style="margin: 0; padding: 5px 15px; font-size: 0.8rem">
+                + New Mission
+              </button>
+            </div>
 
-              <!-- Mission Item -->
-              <div
-                style="
+            <!-- Mission Item -->
+            <div style="
                   background: #f8fafc;
                   padding: 15px;
                   border-radius: 8px;
                   margin-bottom: 15px;
                   border-left: 4px solid #2563eb;
-                "
-              >
-                <div class="flex-between">
-                  <div style="font-weight: 700">Sosialisasi #SlemanSehat</div>
-                  <span
-                    style="
+                ">
+              <div class="flex-between">
+                <div style="font-weight: 700">Sosialisasi #SlemanSehat</div>
+                <span style="
                       font-size: 0.7rem;
                       background: #dcfce7;
                       color: #166534;
                       padding: 2px 8px;
                       border-radius: 4px;
-                    "
-                    >Active</span
-                  >
-                </div>
-                <p style="font-size: 0.9rem; margin: 5px 0; color: #64748b">
-                  Target: 5.000 Shares • Reward: Piagam Bupati
-                </p>
-                <div
-                  style="
+                    ">Active</span>
+              </div>
+              <p style="font-size: 0.9rem; margin: 5px 0; color: #64748b">
+                Target: 5.000 Shares • Reward: Piagam Bupati
+              </p>
+              <div style="
                     background: #e2e8f0;
                     height: 6px;
                     border-radius: 3px;
                     margin-top: 10px;
-                  "
-                >
-                  <div
-                    style="
+                  ">
+                <div style="
                       background: #2563eb;
                       width: 75%;
                       height: 100%;
                       border-radius: 3px;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="text-align: right; font-size: 0.8rem; margin-top: 5px"
-                >
-                  75% Complete
-                </div>
+                    "></div>
               </div>
+              <div style="text-align: right; font-size: 0.8rem; margin-top: 5px">
+                75% Complete
+              </div>
+            </div>
 
-              <div
-                style="
+            <div style="
                   background: #f8fafc;
                   padding: 15px;
                   border-radius: 8px;
                   margin-bottom: 15px;
                   border-left: 4px solid #10b981;
-                "
-              >
-                <div class="flex-between">
-                  <div style="font-weight: 700">Klarifikasi Hoax Vaksin</div>
-                  <span
-                    style="
+                ">
+              <div class="flex-between">
+                <div style="font-weight: 700">Klarifikasi Hoax Vaksin</div>
+                <span style="
                       font-size: 0.7rem;
                       background: #dcfce7;
                       color: #166534;
                       padding: 2px 8px;
                       border-radius: 4px;
-                    "
-                    >Urgent</span
-                  >
-                </div>
-                <p style="font-size: 0.9rem; margin: 5px 0; color: #64748b">
-                  Target: Reply & Clarification • Reward: 100 Poin
-                </p>
-                <div
-                  style="
+                    ">Urgent</span>
+              </div>
+              <p style="font-size: 0.9rem; margin: 5px 0; color: #64748b">
+                Target: Reply & Clarification • Reward: 100 Poin
+              </p>
+              <div style="
                     background: #e2e8f0;
                     height: 6px;
                     border-radius: 3px;
                     margin-top: 10px;
-                  "
-                >
-                  <div
-                    style="
+                  ">
+                <div style="
                       background: #10b981;
                       width: 40%;
                       height: 100%;
                       border-radius: 3px;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="text-align: right; font-size: 0.8rem; margin-top: 5px"
-                >
-                  40% Complete
-                </div>
+                    "></div>
+              </div>
+              <div style="text-align: right; font-size: 0.8rem; margin-top: 5px">
+                40% Complete
               </div>
             </div>
+          </div>
 
-            <div
-              style="
+          <div style="
                 grid-column: 2 / 3;
                 background: #fff;
                 padding: 24px;
                 border-radius: 12px;
                 border: 1px solid #e2e8f0;
                 height: 100%;
-              "
-            >
-              <h3 style="color: #1a1a1a; margin-bottom: 20px">
-                Top Satgas (Leaderboard)
-              </h3>
-              <table style="width: 100%; font-size: 0.9rem">
-                <tr
-                  style="
+              ">
+            <h3 style="color: #1a1a1a; margin-bottom: 20px">
+              Top Satgas (Leaderboard)
+            </h3>
+            <table style="width: 100%; font-size: 0.9rem">
+              <tr style="
                     border-bottom: 1px solid #e2e8f0;
                     text-align: left;
                     color: #64748b;
-                  "
-                >
-                  <th style="padding: 10px">Rank</th>
-                  <th>Name</th>
-                  <th>Points</th>
-                </tr>
-                <tr>
-                  <td style="padding: 10px">
-                    <i class="fa-solid fa-medal text-warning"></i> 1
-                  </td>
-                  <td>Budi Cyber</td>
-                  <td>15,400</td>
-                </tr>
-                <tr>
-                  <td style="padding: 10px">
-                    <i class="fa-solid fa-medal" style="color: #c0c0c0"></i> 2
-                  </td>
-                  <td>Siti Buzzer</td>
-                  <td>12,250</td>
-                </tr>
-                <tr>
-                  <td style="padding: 10px">
-                    <i class="fa-solid fa-medal" style="color: #cd7f32"></i> 3
-                  </td>
-                  <td>Joko Net</td>
-                  <td>11,100</td>
-                </tr>
-              </table>
-              <div style="margin-top: 20px; text-align: center">
-                <button
-                  class="btn-generate"
-                  style="
+                  ">
+                <th style="padding: 10px">Rank</th>
+                <th>Name</th>
+                <th>Points</th>
+              </tr>
+              <tr>
+                <td style="padding: 10px">
+                  <i class="fa-solid fa-medal text-warning"></i> 1
+                </td>
+                <td>Budi Cyber</td>
+                <td>15,400</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px">
+                  <i class="fa-solid fa-medal" style="color: #c0c0c0"></i> 2
+                </td>
+                <td>Siti Buzzer</td>
+                <td>12,250</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px">
+                  <i class="fa-solid fa-medal" style="color: #cd7f32"></i> 3
+                </td>
+                <td>Joko Net</td>
+                <td>11,100</td>
+              </tr>
+            </table>
+            <div style="margin-top: 20px; text-align: center">
+              <button class="btn-generate" style="
                     background: #f1f5f9;
                     color: #333;
                     font-size: 0.8rem;
                     padding: 10px;
-                  "
-                >
-                  View All Satgas
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Manajemen Isu Publik (New) -->
-        <section id="issues" class="view-section">
-          <div style="width: 100%; height: 100%; overflow-y: auto; padding: 20px;">
-            <!-- Full Width Issue Management Container -->
-            <div style="background: #fff; padding: 32px; border-radius: 16px; border: 1px solid #e2e8f0; min-height: calc(100vh - 200px);">
-              <!-- Header -->
-              <div class="flex-between" style="margin-bottom: 24px;">
-                <div>
-                  <h3 style="color: #1a1a1a; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px;">
-                    <i class="fa-solid fa-tasks" style="color: #3b82f6; margin-right: 12px;"></i>
-                    Manajemen Isu Publik
-                  </h3>
-                  <p style="color: #64748b; margin: 0;">Kelola dan monitoring isu publik berdasarkan severity dan status</p>
-                </div>
-                <button class="btn-generate" style="margin: 0; padding: 12px 24px; font-size: 0.9rem;" onclick="showAddIssueModal()">
-                  <i class="fa-solid fa-plus"></i> Tambah Isu Baru
-                </button>
-              </div>
-              
-              <!-- Issue Statistics -->
-              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px;">
-                <div class="issue-stat-card critical">
-                  <div class="issue-stat-icon">
-                    <i class="fa-solid fa-exclamation-triangle"></i>
-                  </div>
-                  <div class="issue-stat-content">
-                    <div class="issue-stat-number" id="criticalCount">3</div>
-                    <div class="issue-stat-label">Kritis</div>
-                  </div>
-                </div>
-                <div class="issue-stat-card high">
-                  <div class="issue-stat-icon">
-                    <i class="fa-solid fa-fire"></i>
-                  </div>
-                  <div class="issue-stat-content">
-                    <div class="issue-stat-number" id="highCount">7</div>
-                    <div class="issue-stat-label">Tinggi</div>
-                  </div>
-                </div>
-                <div class="issue-stat-card medium">
-                  <div class="issue-stat-icon">
-                    <i class="fa-solid fa-info-circle"></i>
-                  </div>
-                  <div class="issue-stat-content">
-                    <div class="issue-stat-number" id="mediumCount">12</div>
-                    <div class="issue-stat-label">Sedang</div>
-                  </div>
-                </div>
-                <div class="issue-stat-card low">
-                  <div class="issue-stat-icon">
-                    <i class="fa-solid fa-check-circle"></i>
-                  </div>
-                  <div class="issue-stat-content">
-                    <div class="issue-stat-number" id="lowCount">5</div>
-                    <div class="issue-stat-label">Rendah</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Category Breakdown -->
-              <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 32px;">
-                <h4 style="font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 16px;">
-                  <i class="fa-solid fa-chart-pie" style="color: #3b82f6;"></i> Ringkasan Per Kategori
-                </h4>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
-                  <div class="category-item">
-                    <div class="category-icon" style="background: #dbeafe;">
-                      <i class="fa-solid fa-road" style="color: #2563eb;"></i>
-                    </div>
-                    <div class="category-info">
-                      <div class="category-name">Infrastruktur Jalan</div>
-                      <div class="category-count">8 isu</div>
-                    </div>
-                  </div>
-                  <div class="category-item">
-                    <div class="category-icon" style="background: #dbeafe;">
-                      <i class="fa-solid fa-droplet" style="color: #0ea5e9;"></i>
-                    </div>
-                    <div class="category-info">
-                      <div class="category-name">Air & Sanitasi</div>
-                      <div class="category-count">5 isu</div>
-                    </div>
-                  </div>
-                  <div class="category-item">
-                    <div class="category-icon" style="background: #dcfce7;">
-                      <i class="fa-solid fa-hospital" style="color: #16a34a;"></i>
-                    </div>
-                    <div class="category-info">
-                      <div class="category-name">Kesehatan</div>
-                      <div class="category-count">6 isu</div>
-                    </div>
-                  </div>
-                  <div class="category-item">
-                    <div class="category-icon" style="background: #fef3c7;">
-                      <i class="fa-solid fa-graduation-cap" style="color: #d97706;"></i>
-                    </div>
-                    <div class="category-info">
-                      <div class="category-name">Pendidikan</div>
-                      <div class="category-count">3 isu</div>
-                    </div>
-                  </div>
-                  <div class="category-item">
-                    <div class="category-icon" style="background: #fee2e2;">
-                      <i class="fa-solid fa-shield-halved" style="color: #dc2626;"></i>
-                    </div>
-                    <div class="category-info">
-                      <div class="category-name">Keamanan</div>
-                      <div class="category-count">2 isu</div>
-                    </div>
-                  </div>
-                  <div class="category-item">
-                    <div class="category-icon" style="background: #e0e7ff;">
-                      <i class="fa-solid fa-users" style="color: #6366f1;"></i>
-                    </div>
-                    <div class="category-info">
-                      <div class="category-name">Sosial & Kemasyarakatan</div>
-                      <div class="category-count">3 isu</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Controls & Content Wrapper -->
-              <div style="background: #f8fafc; padding: 24px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                <!-- Status Filter Tabs -->
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                  <div class="issue-tabs">
-                    <button class="issue-tab active" data-status="all" onclick="filterIssues('all')">
-                      Semua (<span id="totalCount">27</span>)
-                    </button>
-                    <button class="issue-tab" data-status="open" onclick="filterIssues('open')">
-                      Open (<span id="openCount">8</span>)
-                    </button>
-                    <button class="issue-tab" data-status="progress" onclick="filterIssues('progress')">
-                      On Progress (<span id="progressCount">10</span>)
-                    </button>
-                    <button class="issue-tab" data-status="resolved" onclick="filterIssues('resolved')">
-                      Resolved (<span id="resolvedCount">6</span>)
-                    </button>
-                    <button class="issue-tab" data-status="closed" onclick="filterIssues('closed')">
-                      Closed (<span id="closedCount">3</span>)
-                    </button>
-                  </div>
-
-                  <!-- Search and Sort -->
-                  <div style="display: flex; gap: 12px;">
-                    <div style="position: relative; width: 300px;">
-                      <input type="text" id="issueSearch" placeholder="Cari isu..." class="form-input" style="padding-left: 40px;" onkeyup="searchIssues()">
-                      <i class="fa-solid fa-search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
-                    </div>
-                    <select class="form-select" style="width: 160px;" onchange="sortIssues(this.value)">
-                      <option value="newest">Terbaru</option>
-                      <option value="oldest">Terlama</option>
-                      <option value="severity">Severity</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!-- Issue Sections Container -->
-                <div style="display: flex; flex-direction: column; gap: 20px;">
-                  <!-- Open Issues -->
-                  <div class="issue-status-section" id="openIssues">
-                    <div class="issue-status-header">
-                      <h4 style="color: #dc2626; margin: 0;">
-                        <i class="fa-solid fa-exclamation-circle"></i> Open Issues (<span id="openSectionCount">0</span>)
-                      </h4>
-                      <div class="issue-status-desc">Isu yang baru terdeteksi dan memerlukan tindakan segera</div>
-                    </div>
-                    <div class="issue-list" id="openIssuesList">
-                      <!-- Open issues will be loaded here -->
-                    </div>
-                  </div>
-
-                  <!-- On Progress Issues -->
-                  <div class="issue-status-section" id="progressIssues">
-                    <div class="issue-status-header">
-                      <h4 style="color: #d97706; margin: 0;">
-                        <i class="fa-solid fa-spinner"></i> On Progress (<span id="progressSectionCount">0</span>)
-                      </h4>
-                      <div class="issue-status-desc">Isu yang sedang dalam proses penanganan oleh PIC terkait</div>
-                    </div>
-                    <div class="issue-list" id="progressIssuesList">
-                      <!-- Progress issues will be loaded here -->
-                    </div>
-                  </div>
-
-                  <!-- Resolved Issues -->
-                  <div class="issue-status-section" id="resolvedIssues">
-                    <div class="issue-status-header">
-                      <h4 style="color: #2563eb; margin: 0;">
-                        <i class="fa-solid fa-check-circle"></i> Resolved (<span id="resolvedSectionCount">0</span>)
-                      </h4>
-                      <div class="issue-status-desc">Isu yang telah berhasil diselesaikan dan ditangani dengan baik</div>
-                    </div>
-                    <div class="issue-list" id="resolvedIssuesList">
-                      <!-- Resolved issues will be loaded here -->
-                    </div>
-                  </div>
-
-                  <!-- Closed Issues -->
-                  <div class="issue-status-section" id="closedIssues">
-                    <div class="issue-status-header">
-                      <h4 style="color: #16a34a; margin: 0;">
-                        <i class="fa-solid fa-check-double"></i> Closed (<span id="closedSectionCount">0</span>)
-                      </h4>
-                      <div class="issue-status-desc">Isu yang telah ditutup, diselesaikan, dan diarsipkan</div>
-                    </div>
-                    <div class="issue-list" id="closedIssuesList">
-                      <!-- Closed issues will be loaded here -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Optimizer View -->
-        <section id="optimizer" class="view-section">
-          <!-- (Existing Content preserved) -->
-          <div class="optimizer-layout">
-            <div class="input-panel">
-              <h3 style="margin-bottom: 20px">AI Public Communication</h3>
-              <div class="form-group">
-                <label class="form-label">Select Issue</label>
-                <select class="form-select">
-                  <option>Antrian RSUD (High Priority)</option>
-                  <option>Penerimaan Siswa Baru</option>
-                  <option>Potensi Wisata Kaliurang</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Target Audience</label>
-                <select class="form-select">
-                  <option>Gen Z (18-24)</option>
-                  <option>Millennials (25-40)</option>
-                  <option>Umum / Pedesaan</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Tone</label>
-                <select class="form-select">
-                  <option>Empathetic & Action-Oriented</option>
-                  <option>Casual & Humorous</option>
-                  <option>Formal & Educational</option>
-                </select>
-              </div>
-              <button id="btnGenerate" class="btn-generate">
-                <div class="loader"></div>
-                <span class="btn-text">Generate Communication</span>
+                  ">
+                View All Satgas
               </button>
             </div>
-            <div class="output-panel">
-              <div
-                id="outputPlaceholder"
-                style="
+          </div>
+        </div>
+      </section>
+
+      <!-- Optimizer View -->
+      <section id="optimizer" class="view-section">
+        <!-- (Existing Content preserved) -->
+        <div class="optimizer-layout">
+          <div class="input-panel">
+            <h3 style="margin-bottom: 20px">AI Public Communication</h3>
+            <div class="form-group">
+              <label class="form-label">Select Issue</label>
+              <select class="form-select">
+                <option>Antrian RSUD (High Priority)</option>
+                <option>Penerimaan Siswa Baru</option>
+                <option>Potensi Wisata Kaliurang</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target Audience</label>
+              <select class="form-select">
+                <option>Gen Z (18-24)</option>
+                <option>Millennials (25-40)</option>
+                <option>Umum / Pedesaan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tone</label>
+              <select class="form-select">
+                <option>Empathetic & Action-Oriented</option>
+                <option>Casual & Humorous</option>
+                <option>Formal & Educational</option>
+              </select>
+            </div>
+            <button id="btnGenerate" class="btn-generate">
+              <div class="loader"></div>
+              <span class="btn-text">Generate Communication</span>
+            </button>
+          </div>
+          <div class="output-panel">
+            <div id="outputPlaceholder" style="
                   height: 100%;
                   display: flex;
                   flex-direction: column;
@@ -1048,585 +965,446 @@
                   justify-content: center;
                   color: var(--text-muted);
                   text-align: center;
-                "
-              >
-                <i
-                  class="fa-solid fa-robot"
-                  style="font-size: 4rem; opacity: 0.5; margin-bottom: 20px"
-                ></i>
-                <p>
-                  Select context and click generate to receive AI-powered public
-                  communication strategy.
-                </p>
+                ">
+              <i class="fa-solid fa-robot" style="font-size: 4rem; opacity: 0.5; margin-bottom: 20px"></i>
+              <p>
+                Select context and click generate to receive AI-powered public
+                communication strategy.
+              </p>
+            </div>
+            <div id="aiOutput" class="output-content" style="display: none">
+              <div class="flex-between">
+                <h3>
+                  <i class="fa-solid fa-check-circle text-success"></i>
+                  Strategy Ready
+                </h3>
+                <div class="text-muted" style="font-size: 0.8rem">
+                  Generated by OpenAI GPT-4
+                </div>
               </div>
-              <div id="aiOutput" class="output-content" style="display: none">
-                <div class="flex-between">
-                  <h3>
-                    <i class="fa-solid fa-check-circle text-success"></i>
-                    Strategy Ready
-                  </h3>
-                  <div class="text-muted" style="font-size: 0.8rem">
-                    Generated by OpenAI GPT-4
+              <div class="script-box">
+                <div class="script-section">
+                  <div class="script-label">Format Recommendation</div>
+                  <div>
+                    Video TikTok (Vertical), 20-30 Seconds. Fast paced cuts.
                   </div>
                 </div>
-                <div class="script-box">
-                  <div class="script-section">
-                    <div class="script-label">Format Recommendation</div>
-                    <div>
-                      Video TikTok (Vertical), 20-30 Seconds. Fast paced cuts.
-                    </div>
-                  </div>
-                  <div class="script-section">
-                    <div class="script-label">Trending Sound</div>
-                    <div style="display: flex; align-items: center; gap: 10px">
-                      <i class="fa-solid fa-music"></i> "DJ Ojo Dibandingke
-                      Remix"
-                      <span
-                        style="
+                <div class="script-section">
+                  <div class="script-label">Trending Sound</div>
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <i class="fa-solid fa-music"></i> "DJ Ojo Dibandingke
+                    Remix"
+                    <span style="
                           font-size: 0.7rem;
                           background: var(--success);
                           color: #fff;
                           padding: 2px 6px;
                           border-radius: 4px;
-                        "
-                        >Viral</span
-                      >
-                    </div>
+                        ">Viral</span>
                   </div>
-                  <div class="script-section">
-                    <div class="script-label">Script</div>
-                    <div
-                      style="
+                </div>
+                <div class="script-section">
+                  <div class="script-label">Script</div>
+                  <div style="
                         background: rgba(0, 0, 0, 0.05);
                         padding: 10px;
                         border-radius: 4px;
                         margin-top: 5px;
                         font-family: monospace;
                         border: 1px solid #e2e8f0;
-                      "
-                    >
-                      <span class="text-warning">[0-3s Hook]</span> (Visual:
-                      Warga sakit) "Antrian RSUD panjang? Tenang, Pemkab Sleman
-                      punya solusinya!"<br /><br />
-                      <span class="text-warning">[Body]</span> "Gak pake lama!
-                      Hari ini sistem pendaftaran online kita optimalkan. Bukti
-                      Sleman Smart Regency!"<br /><br />
-                      <span class="text-warning">[CTA]</span> "Komen daerah mana
-                      lagi yang butuh perbaikan? #SlemanMelayani"
-                    </div>
+                      ">
+                    <span class="text-warning">[0-3s Hook]</span> (Visual:
+                    Warga sakit) "Antrian RSUD panjang? Tenang, Pemkab Sleman
+                    punya solusinya!"<br /><br />
+                    <span class="text-warning">[Body]</span> "Gak pake lama!
+                    Hari ini sistem pendaftaran online kita optimalkan. Bukti
+                    Sleman Smart Regency!"<br /><br />
+                    <span class="text-warning">[CTA]</span> "Komen daerah mana
+                    lagi yang butuh perbaikan? #SlemanMelayani"
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Accounts View (Preserved) -->
-        <section id="accounts" class="view-section">
-          <div
-            class="glass"
-            style="
+      <!-- Accounts View (Preserved) -->
+      <section id="accounts" class="view-section">
+        <div class="glass" style="
               padding: 30px;
               border-radius: 16px;
               height: 100%;
               display: flex;
               flex-direction: column;
-            "
-          >
-            <div class="flex-between" style="margin-bottom: 20px">
-              <h2 style="font-size: 1.2rem">
-                Media & Tokoh Masyarakat Watchlist
-              </h2>
-              <div style="display: flex; gap: 10px">
-                <input
-                  type="text"
-                  placeholder="Search Account..."
-                  class="form-input"
-                  style="width: 250px; padding: 8px 12px; font-size: 0.9rem"
-                />
-                <button
-                  class="btn-generate"
-                  style="margin: 0; padding: 8px 15px; font-size: 0.9rem"
-                >
-                  <i class="fa-solid fa-plus"></i> Add
-                </button>
-              </div>
+            ">
+          <div class="flex-between" style="margin-bottom: 20px">
+            <h2 style="font-size: 1.2rem">
+              Media & Tokoh Masyarakat Watchlist
+            </h2>
+            <div style="display: flex; gap: 10px">
+              <input type="text" placeholder="Search Account..." class="form-input"
+                style="width: 250px; padding: 8px 12px; font-size: 0.9rem" />
+              <button class="btn-generate" style="margin: 0; padding: 8px 15px; font-size: 0.9rem">
+                <i class="fa-solid fa-plus"></i> Add
+              </button>
             </div>
-            <div
-              style="
+          </div>
+          <div style="
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 gap: 20px;
-              "
-            >
-              <div
-                style="
+              ">
+            <div style="
                   background: #f8fafc;
                   padding: 20px;
                   border-radius: 12px;
                   border: 1px solid #e2e8f0;
-                "
-              >
-                <div class="flex-between">
-                  <h4 style="margin: 0">@kritik_pedas</h4>
-                  <span class="text-danger">Opposition</span>
-                </div>
+                ">
+              <div class="flex-between">
+                <h4 style="margin: 0">@kritik_pedas</h4>
+                <span class="text-danger">Opposition</span>
               </div>
-              <div
-                style="
+            </div>
+            <div style="
                   background: #feb;
                   padding: 20px;
                   border-radius: 12px;
                   border: 1px solid #fde68a;
-                "
-              >
-                <div class="flex-between">
-                  <h4 style="margin: 0">@pemkab_sleman</h4>
-                  <span class="text-success">Ally</span>
-                </div>
+                ">
+              <div class="flex-between">
+                <h4 style="margin: 0">@pemkab_sleman</h4>
+                <span class="text-success">Ally</span>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Reports View (New) -->
-        <section id="reports" class="view-section">
-          <div
-            style="
+      <!-- Reports View (New) -->
+      <section id="reports" class="view-section">
+        <div style="
               padding: 30px;
               background: #fff;
               border-radius: 16px;
               border: 1px solid #e2e8f0;
               height: 100%;
-            "
-          >
-            <h2 style="font-size: 1.5rem; margin-bottom: 20px; color: #1a1a1a">
-              Executive Reports Center
-            </h2>
-            <p style="color: #64748b; margin-bottom: 30px">
-              Generate and download PDF reports for stakeholders.
-            </p>
+            ">
+          <h2 style="font-size: 1.5rem; margin-bottom: 20px; color: #1a1a1a">
+            Executive Reports Center
+          </h2>
+          <p style="color: #64748b; margin-bottom: 30px">
+            Generate and download PDF reports for stakeholders.
+          </p>
 
-            <div
-              style="
+          <div style="
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 gap: 30px;
-              "
-            >
-              <!-- Report Card -->
-              <div
-                style="
+              ">
+            <!-- Report Card -->
+            <div style="
                   border: 1px solid #e2e8f0;
                   border-radius: 12px;
                   overflow: hidden;
                   transition: transform 0.2s;
-                "
-                onmouseover="this.style.transform = 'translateY(-5px)'"
-                onmouseout="this.style.transform = 'translateY(0)'"
-              >
-                <div
-                  style="
+                " onmouseover="this.style.transform = 'translateY(-5px)'"
+              onmouseout="this.style.transform = 'translateY(0)'">
+              <div style="
                     height: 150px;
                     background: #2563eb;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                  "
-                >
-                  <i
-                    class="fa-solid fa-file-invoice"
-                    style="font-size: 4rem; color: #fff"
-                  ></i>
-                </div>
-                <div style="padding: 20px">
-                  <h4 style="font-size: 1.1rem; margin-bottom: 5px">
-                    Daily Briefing
-                  </h4>
-                  <p
-                    style="
+                  ">
+                <i class="fa-solid fa-file-invoice" style="font-size: 4rem; color: #fff"></i>
+              </div>
+              <div style="padding: 20px">
+                <h4 style="font-size: 1.1rem; margin-bottom: 5px">
+                  Daily Briefing
+                </h4>
+                <p style="
                       font-size: 0.85rem;
                       color: #64748b;
                       margin-bottom: 15px;
-                    "
-                  >
-                    24h sentiment analysis & top issues.
-                  </p>
-                  <button
-                    class="btn-generate"
-                    onclick="generateReport('Daily')"
-                    style="width: 100%; padding: 10px; font-size: 0.9rem"
-                  >
-                    <i class="fa-solid fa-download"></i> Download PDF
-                  </button>
-                </div>
+                    ">
+                  24h sentiment analysis & top issues.
+                </p>
+                <button class="btn-generate" onclick="generateReport('Daily')"
+                  style="width: 100%; padding: 10px; font-size: 0.9rem">
+                  <i class="fa-solid fa-download"></i> Download PDF
+                </button>
               </div>
+            </div>
 
-              <div
-                style="
+            <div style="
                   border: 1px solid #e2e8f0;
                   border-radius: 12px;
                   overflow: hidden;
-                "
-              >
-                <div
-                  style="
+                ">
+              <div style="
                     height: 150px;
                     background: #334155;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                  "
-                >
-                  <i
-                    class="fa-solid fa-chart-pie"
-                    style="font-size: 4rem; color: #fff"
-                  ></i>
-                </div>
-                <div style="padding: 20px">
-                  <h4 style="font-size: 1.1rem; margin-bottom: 5px">
-                    Weekly Strategy
-                  </h4>
-                  <p
-                    style="
+                  ">
+                <i class="fa-solid fa-chart-pie" style="font-size: 4rem; color: #fff"></i>
+              </div>
+              <div style="padding: 20px">
+                <h4 style="font-size: 1.1rem; margin-bottom: 5px">
+                  Weekly Strategy
+                </h4>
+                <p style="
                       font-size: 0.85rem;
                       color: #64748b;
                       margin-bottom: 15px;
-                    "
-                  >
-                    Strategy recommendation & competitor intel.
-                  </p>
-                  <button
-                    class="btn-generate"
-                    onclick="generateReport('Weekly')"
-                    style="
+                    ">
+                  Strategy recommendation & competitor intel.
+                </p>
+                <button class="btn-generate" onclick="generateReport('Weekly')" style="
                       width: 100%;
                       padding: 10px;
                       font-size: 0.9rem;
                       background: #f1f5f9;
                       color: #333;
-                    "
-                  >
-                    <i class="fa-solid fa-download"></i> Download PDF
-                  </button>
-                </div>
+                    ">
+                  <i class="fa-solid fa-download"></i> Download PDF
+                </button>
               </div>
+            </div>
 
-              <div
-                style="
+            <div style="
                   border: 1px solid #e2e8f0;
                   border-radius: 12px;
                   overflow: hidden;
-                "
-              >
-                <div
-                  style="
+                ">
+              <div style="
                     height: 150px;
                     background: #ef4444;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                  "
-                >
-                  <i
-                    class="fa-solid fa-triangle-exclamation"
-                    style="font-size: 4rem; color: #fff"
-                  ></i>
-                </div>
-                <div style="padding: 20px">
-                  <h4 style="font-size: 1.1rem; margin-bottom: 5px">
-                    Crisis Logs
-                  </h4>
-                  <p
-                    style="
+                  ">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 4rem; color: #fff"></i>
+              </div>
+              <div style="padding: 20px">
+                <h4 style="font-size: 1.1rem; margin-bottom: 5px">
+                  Crisis Logs
+                </h4>
+                <p style="
                       font-size: 0.85rem;
                       color: #64748b;
                       margin-bottom: 15px;
-                    "
-                  >
-                    Detailed logs of recent alerts and actions.
-                  </p>
-                  <button
-                    class="btn-generate"
-                    onclick="generateReport('Crisis')"
-                    style="
+                    ">
+                  Detailed logs of recent alerts and actions.
+                </p>
+                <button class="btn-generate" onclick="generateReport('Crisis')" style="
                       width: 100%;
                       padding: 10px;
                       font-size: 0.9rem;
                       background: #f1f5f9;
                       color: #333;
-                    "
-                  >
-                    <i class="fa-solid fa-download"></i> Download PDF
-                  </button>
-                </div>
+                    ">
+                  <i class="fa-solid fa-download"></i> Download PDF
+                </button>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Pesan Masuk View untuk PIC -->
-        <section id="inbox" class="view-section">
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-label">Pesan Masuk (24h)</div>
-              <div class="stat-value">47</div>
-              <div class="stat-trend text-warning">
-                <i class="fa-solid fa-arrow-up"></i> 8% vs kemarin
-              </div>
-            </div>
-            <div class="stat-card negative">
-              <div class="stat-label">Sentimen Negatif</div>
-              <div class="stat-value text-danger">12</div>
-              <div class="stat-trend text-danger">Perlu Tindakan</div>
-            </div>
-            <div class="stat-card positive">
-              <div class="stat-label">TikTok Mentions</div>
-              <div class="stat-value text-success">28</div>
-              <div class="stat-trend text-muted">Monitoring Aktif</div>
-            </div>
-            <div class="stat-card warning">
-              <div class="stat-label">X (Twitter) Mentions</div>
-              <div class="stat-value text-warning">19</div>
-              <div class="stat-trend text-muted">Monitoring Aktif</div>
+      <!-- Pesan Masuk View untuk PIC -->
+      <section id="inbox" class="view-section">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Pesan Masuk (24h)</div>
+            <div class="stat-value">47</div>
+            <div class="stat-trend text-warning">
+              <i class="fa-solid fa-arrow-up"></i> 8% vs kemarin
             </div>
           </div>
+          <div class="stat-card negative">
+            <div class="stat-label">Sentimen Negatif</div>
+            <div class="stat-value text-danger">12</div>
+            <div class="stat-trend text-danger">Perlu Tindakan</div>
+          </div>
+          <div class="stat-card positive">
+            <div class="stat-label">TikTok Mentions</div>
+            <div class="stat-value text-success">28</div>
+            <div class="stat-trend text-muted">Monitoring Aktif</div>
+          </div>
+          <div class="stat-card warning">
+            <div class="stat-label">X (Twitter) Mentions</div>
+            <div class="stat-value text-warning">19</div>
+            <div class="stat-trend text-muted">Monitoring Aktif</div>
+          </div>
+        </div>
 
-          <div class="dashboard-main">
-            <!-- Map Lokasi -->
-            <div class="chart-container" style="height: 380px; margin-bottom: 20px;">
-              <h3 style="font-size: 1rem; color: #1a1a1a; margin-bottom: 15px;">
-                <i class="fa-solid fa-map-marker-alt"></i> Lokasi Permasalahan
-              </h3>
-              <div id="inbox-map" style="height: 300px; border-radius: 8px; background: #f0f0f0;"></div>
-            </div>
+        <div class="dashboard-main">
+          <!-- Map Lokasi -->
+          <div class="chart-container" style="height: 380px; margin-bottom: 20px;">
+            <h3 style="font-size: 1rem; color: #1a1a1a; margin-bottom: 15px;">
+              <i class="fa-solid fa-map-marker-alt"></i> Lokasi Permasalahan
+            </h3>
+            <div id="inbox-map" style="height: 300px; border-radius: 8px; background: #f0f0f0;"></div>
+          </div>
 
-            <!-- Pesan dari Admin -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-              <div class="chart-container">
-                <h3 style="font-size: 0.9rem; color: #1a1a1a; margin-bottom: 10px;">
-                  <i class="fa-brands fa-tiktok" style="color: #000;"></i> Pesan Admin - TikTok
-                </h3>
-                <div class="admin-message-list">
-                  <div class="message-item" onclick="showMessageDetail('tiktok-1')">
-                    <div class="message-header">
-                      <span class="message-platform">📱 TikTok</span>
-                      <span class="message-priority high">🔴 Prioritas Tinggi</span>
-                    </div>
-                    <div class="message-content">Video jalan rusak viral di Condongcatur</div>
-                    <div class="message-meta">
-                      <span class="message-user">@user_sleman</span>
-                      <span class="message-time">Admin: 15 menit lalu</span>
-                      <span class="message-location">📍 Condongcatur</span>
-                    </div>
-                    <div class="message-admin-note" style="display: none;" id="tiktok-1-note">
-                      <strong>📩 Pesan dari Admin:</strong> "Segera tinjau lokasi ini dan koordinasi dengan dinas PU. Video sudah viral 15K views, perlu respon cepat!"
-                    </div>
-                  </div>
-                  <div class="message-item" onclick="showMessageDetail('tiktok-2')">
-                    <div class="message-header">
-                      <span class="message-platform">📱 TikTok</span>
-                      <span class="message-priority medium">🟡 Prioritas Sedang</span>
-                    </div>
-                    <div class="message-content">Keluhan sampah menumpuk di area Depok</div>
-                    <div class="message-meta">
-                      <span class="message-user">@warga_sleman</span>
-                      <span class="message-time">Admin: 1 jam lalu</span>
-                      <span class="message-location">📍 Depok</span>
-                    </div>
-                    <div class="message-admin-note" style="display: none;" id="tiktok-2-note">
-                      <strong>📩 Pesan dari Admin:</strong> "Koordinasi dengan dinas lingkungan. Sampaikan jadwal pengangkutan yang baru ke warga."
-                    </div>
-                  </div>
-                  <div class="message-item" onclick="showMessageDetail('tiktok-3')">
-                    <div class="message-header">
-                      <span class="message-platform">📱 TikTok</span>
-                      <span class="message-priority low">🟢 Prioritas Rendah</span>
-                    </div>
-                    <div class="message-content">Fasilitas umum rusak di parkir Sleman</div>
-                    <div class="message-meta">
-                      <span class="message-user">@komunitas_sleman</span>
-                      <span class="message-time">Admin: 2 jam lalu</span>
-                      <span class="message-location">📍 Sleman Kota</span>
-                    </div>
-                    <div class="message-admin-note" style="display: none;" id="tiktok-3-note">
-                      <strong>📩 Pesan dari Admin:</strong> "Survey lokasi dan buat laporan perbaikan. Prioritaskan minggu depan."
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="chart-container">
-                <h3 style="font-size: 0.9rem; color: #1a1a1a; margin-bottom: 10px;">
-                  <i class="fa-brands fa-x-twitter" style="color: #000;"></i> Pesan Admin - X (Twitter)
-                </h3>
-                <div class="admin-message-list">
-                  <div class="message-item" onclick="showMessageDetail('twitter-1')">
-                    <div class="message-header">
-                      <span class="message-platform">🐦 X</span>
-                      <span class="message-priority high">🔴 Prioritas Tinggi</span>
-                    </div>
-                    <div class="message-content">Keluhan pelayanan kesehatan lambat</div>
-                    <div class="message-meta">
-                      <span class="message-user">@patient_sleman</span>
-                      <span class="message-time">Admin: 30 menit lalu</span>
-                      <span class="message-location">📍 Tempel</span>
-                    </div>
-                    <div class="message-admin-note" style="display: none;" id="twitter-1-note">
-                      <strong>📩 Pesan dari Admin:</strong> "Prioritaskan laporan ini! Hubungi kepala puskesmas untuk penjelasan dan solusi segera."
-                    </div>
-                  </div>
-                  <div class="message-item" onclick="showMessageDetail('twitter-2')">
-                    <div class="message-header">
-                      <span class="message-platform">🐦 X</span>
-                      <span class="message-priority medium">🟡 Prioritas Sedang</span>
-                    </div>
-                    <div class="message-content">Proses perizinan yang membingungkan</div>
-                    <div class="message-meta">
-                      <span class="message-user">@pengusaha_sleman</span>
-                      <span class="message-time">Admin: 1.5 jam lalu</span>
-                      <span class="message-location">📍 Ngemplak</span>
-                    </div>
-                    <div class="message-admin-note" style="display: none;" id="twitter-2-note">
-                      <strong>📩 Pesan dari Admin:</strong> "Bantu klarifikasi proses perizinan. Berikan panduan step by step ke pengusaha."
-                    </div>
-                  </div>
-                  <div class="message-item" onclick="showMessageDetail('twitter-3')">
-                    <div class="message-header">
-                      <span class="message-platform">🐦 X</span>
-                      <span class="message-priority low">🟢 Prioritas Rendah</span>
-                    </div>
-                    <div class="message-content">Infrastruktur jalan perlu perhatian</div>
-                    <div class="message-meta">
-                      <span class="message-user">@driver_sleman</span>
-                      <span class="message-time">Admin: 3 jam lalu</span>
-                      <span class="message-location">📍 Gamping</span>
-                    </div>
-                    <div class="message-admin-note" style="display: none;" id="twitter-3-note">
-                      <strong>📩 Pesan dari Admin:</strong> "Dokumentasikan untuk perencanaan Q2. Masukkan dalam daftar prioritas infrastruktur."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- AI Generator -->
+          <!-- Pesan dari Admin -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
             <div class="chart-container">
-              <h3 style="font-size: 1rem; color: #1a1a1a; margin-bottom: 15px;">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> AI Content Generator
+              <h3 style="font-size: 0.9rem; color: #1a1a1a; margin-bottom: 10px;">
+                <i class="fa-brands fa-tiktok" style="color: #000;"></i> Pesan Admin - TikTok
               </h3>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div>
-                  <label style="display: block; margin-bottom: 8px; font-size: 0.9rem; color: #666;">Pilih Permasalahan:</label>
-                  <select id="problem-select" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px;">
-                    <option value="">Pilih permasalahan...</option>
-                    <option value="jalan-rusak">Jalan Rusak di Condongcatur</option>
-                    <option value="sampah">Sampah tidak diangkut</option>
-                    <option value="fasilitas-umum">Fasilitas Umum Rusak</option>
-                    <option value="pelayanan">Pelayanan kesehatan lambat</option>
-                    <option value="perizinan">Proses perizinan rumit</option>
-                    <option value="infrastruktur">Infrastruktur perlu perbaikan</option>
-                  </select>
-                  <button onclick="generateAIContent()" style="width: 100%; padding: 12px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 500;">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Video Script
-                  </button>
+              <div class="admin-message-list">
+                <div class="message-item" onclick="showMessageDetail('tiktok-1')">
+                  <div class="message-header">
+                    <span class="message-platform">📱 TikTok</span>
+                    <span class="message-priority high">🔴 Prioritas Tinggi</span>
+                  </div>
+                  <div class="message-content">Video jalan rusak viral di Condongcatur</div>
+                  <div class="message-meta">
+                    <span class="message-user">@user_sleman</span>
+                    <span class="message-time">Admin: 15 menit lalu</span>
+                    <span class="message-location">📍 Condongcatur</span>
+                  </div>
+                  <div class="message-admin-note" style="display: none;" id="tiktok-1-note">
+                    <strong>📩 Pesan dari Admin:</strong> "Segera tinjau lokasi ini dan koordinasi dengan dinas PU.
+                    Video sudah viral 15K views, perlu respon cepat!"
+                  </div>
                 </div>
-                <div>
-                  <label style="display: block; margin-bottom: 8px; font-size: 0.9rem; color: #666;">Hasil AI:</label>
-                  <div id="ai-result" style="width: 100%; height: 200px; padding: 12px; border: 1px solid #e2e8f0; border-radius: 6px; background: #f8fafc; font-size: 0.9rem; line-height: 1.5; overflow-y: auto; color: #334155;">
-                    <div style="display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: center; color: #94a3b8;">
-                      <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 1.5rem; margin-bottom: 8px; color: #cbd5e1;"></i>
-                      <div>Pilih permasalahan dan klik "Generate" untuk membuat video script</div>
-                    </div>
+                <div class="message-item" onclick="showMessageDetail('tiktok-2')">
+                  <div class="message-header">
+                    <span class="message-platform">📱 TikTok</span>
+                    <span class="message-priority medium">🟡 Prioritas Sedang</span>
+                  </div>
+                  <div class="message-content">Keluhan sampah menumpuk di area Depok</div>
+                  <div class="message-meta">
+                    <span class="message-user">@warga_sleman</span>
+                    <span class="message-time">Admin: 1 jam lalu</span>
+                    <span class="message-location">📍 Depok</span>
+                  </div>
+                  <div class="message-admin-note" style="display: none;" id="tiktok-2-note">
+                    <strong>📩 Pesan dari Admin:</strong> "Koordinasi dengan dinas lingkungan. Sampaikan jadwal
+                    pengangkutan yang baru ke warga."
+                  </div>
+                </div>
+                <div class="message-item" onclick="showMessageDetail('tiktok-3')">
+                  <div class="message-header">
+                    <span class="message-platform">📱 TikTok</span>
+                    <span class="message-priority low">🟢 Prioritas Rendah</span>
+                  </div>
+                  <div class="message-content">Fasilitas umum rusak di parkir Sleman</div>
+                  <div class="message-meta">
+                    <span class="message-user">@komunitas_sleman</span>
+                    <span class="message-time">Admin: 2 jam lalu</span>
+                    <span class="message-location">📍 Sleman Kota</span>
+                  </div>
+                  <div class="message-admin-note" style="display: none;" id="tiktok-3-note">
+                    <strong>📩 Pesan dari Admin:</strong> "Survey lokasi dan buat laporan perbaikan. Prioritaskan minggu
+                    depan."
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-container">
+              <h3 style="font-size: 0.9rem; color: #1a1a1a; margin-bottom: 10px;">
+                <i class="fa-brands fa-x-twitter" style="color: #000;"></i> Pesan Admin - X (Twitter)
+              </h3>
+              <div class="admin-message-list">
+                <div class="message-item" onclick="showMessageDetail('twitter-1')">
+                  <div class="message-header">
+                    <span class="message-platform">🐦 X</span>
+                    <span class="message-priority high">🔴 Prioritas Tinggi</span>
+                  </div>
+                  <div class="message-content">Keluhan pelayanan kesehatan lambat</div>
+                  <div class="message-meta">
+                    <span class="message-user">@patient_sleman</span>
+                    <span class="message-time">Admin: 30 menit lalu</span>
+                    <span class="message-location">📍 Tempel</span>
+                  </div>
+                  <div class="message-admin-note" style="display: none;" id="twitter-1-note">
+                    <strong>📩 Pesan dari Admin:</strong> "Prioritaskan laporan ini! Hubungi kepala puskesmas untuk
+                    penjelasan dan solusi segera."
+                  </div>
+                </div>
+                <div class="message-item" onclick="showMessageDetail('twitter-2')">
+                  <div class="message-header">
+                    <span class="message-platform">🐦 X</span>
+                    <span class="message-priority medium">🟡 Prioritas Sedang</span>
+                  </div>
+                  <div class="message-content">Proses perizinan yang membingungkan</div>
+                  <div class="message-meta">
+                    <span class="message-user">@pengusaha_sleman</span>
+                    <span class="message-time">Admin: 1.5 jam lalu</span>
+                    <span class="message-location">📍 Ngemplak</span>
+                  </div>
+                  <div class="message-admin-note" style="display: none;" id="twitter-2-note">
+                    <strong>📩 Pesan dari Admin:</strong> "Bantu klarifikasi proses perizinan. Berikan panduan step by
+                    step ke pengusaha."
+                  </div>
+                </div>
+                <div class="message-item" onclick="showMessageDetail('twitter-3')">
+                  <div class="message-header">
+                    <span class="message-platform">🐦 X</span>
+                    <span class="message-priority low">🟢 Prioritas Rendah</span>
+                  </div>
+                  <div class="message-content">Infrastruktur jalan perlu perhatian</div>
+                  <div class="message-meta">
+                    <span class="message-user">@driver_sleman</span>
+                    <span class="message-time">Admin: 3 jam lalu</span>
+                    <span class="message-location">📍 Gamping</span>
+                  </div>
+                  <div class="message-admin-note" style="display: none;" id="twitter-3-note">
+                    <strong>📩 Pesan dari Admin:</strong> "Dokumentasikan untuk perencanaan Q2. Masukkan dalam daftar
+                    prioritas infrastruktur."
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
-      </div>
-    </main>
 
-    <script src="js/script.js"></script>
-    <script>
-      // Mapping pesan ke pilihan masalah
-      const messageToProblemMap = {
-        'tiktok-1': 'jalan-rusak',
-        'tiktok-2': 'sampah',
-        'tiktok-3': 'fasilitas-umum',
-        'twitter-1': 'pelayanan',
-        'twitter-2': 'perizinan',
-        'twitter-3': 'infrastruktur'
-      };
+          <!-- AI Generator -->
+          <div class="chart-container">
+            <h3 style="font-size: 1rem; color: #1a1a1a; margin-bottom: 15px;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> AI Content Generator
+            </h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div>
+                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem; color: #666;">Pilih
+                  Permasalahan:</label>
+                <select id="problem-select"
+                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px;">
+                  <option value="jalan-rusak">Jalan Rusak di Condongcatur</option>
+                  <option value="sampah">Sampah tidak diangkut</option>
+                  <option value="pelayanan">Pelayanan kesehatan lambat</option>
+                  <option value="perizinan">Proses perizinan rumit</option>
+                </select>
+                <button onclick="generateAIContent()"
+                  style="width: 100%; padding: 12px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                  <i class="fa-solid fa-magic"></i> Generate Video Script
+                </button>
+              </div>
+              <div>
+                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem; color: #666;">Hasil AI:</label>
+                <div id="ai-result"
+                  style="width: 100%; height: 120px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; background: #f9f9f9; font-size: 0.85rem; overflow-y: auto;">
+                  Klik "Generate" untuk membuat video script...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
 
-      // Update fungsi showMessageDetail
-      function showMessageDetail(messageId) {
-        // Sembunyikan semua catatan admin
-        document.querySelectorAll('.message-admin-note').forEach(note => {
-          note.style.display = 'none';
-        });
-        
-        // Hapus class active dari semua pesan
-        document.querySelectorAll('.message-item').forEach(item => {
-          item.classList.remove('active');
-        });
-        
-        // Tampilkan catatan admin yang dipilih
-        const noteElement = document.getElementById(messageId + '-note');
-        if (noteElement) {
-          noteElement.style.display = 'block';
-        }
-        
-        // Tambah class active ke pesan yang dipilih
-        event.currentTarget.classList.add('active');
-        
-        // Update peta (jika ada)
-        const locationMap = {
-          'tiktok-1': { lat: -7.7616, lng: 110.3877, zoom: 15, name: "Condongcatur" },
-          'tiktok-2': { lat: -7.7828, lng: 110.3789, zoom: 15, name: "Depok" },
-          'tiktok-3': { lat: -7.7956, lng: 110.3695, zoom: 15, name: "Sleman Kota" },
-          'twitter-1': { lat: -7.8156, lng: 110.3595, zoom: 15, name: "Tempel" },
-          'twitter-2': { lat: -7.7456, lng: 110.3795, zoom: 15, name: "Ngemplak" },
-          'twitter-3': { lat: -7.7556, lng: 110.3895, zoom: 15, name: "Gamping" }
-        };
-        
-        const location = locationMap[messageId];
-        if (location && window.inboxMap) {
-          window.inboxMap.setView([location.lat, location.lng], location.zoom);
-          
-          // Hapus highlight circle yang lama jika ada
-          if (window.currentHighlight) {
-            window.inboxMap.removeLayer(window.currentHighlight);
-            window.currentHighlight = null;
-          }
-        }
-        
-        // Update dropdown AI Content Generator
-        const problemSelect = document.getElementById('problem-select');
-        if (problemSelect && messageToProblemMap[messageId]) {
-          problemSelect.value = messageToProblemMap[messageId];
-        }
-      }
+  <script src="js/script.js"></script>
+  <script src="js/dashboardUtama.js"></script>
+  <script src="js/monitoringSentimen.js"></script>
+  <script src="js/monitoringIssue.js"></script>
+  <script src="js/petaVisualisasi.js"></script>
+</body>
 
-      // Fungsi untuk generate konten AI
-      function generateAIContent() {
-        const problemSelect = document.getElementById('problem-select');
-        const aiResult = document.getElementById('ai-result');
-        const problems = {
-          'jalan-rusak': `📌 <strong>Script Video Respon Jalan Rusak</strong><br><br>"Selamat siang warga Sleman yang kami banggakan,<br><br>Kami telah menerima laporan mengenai kondisi jalan di Condongcatur. Tim kami sedang melakukan pengecekan dan akan segera melakukan perbaikan. Mohon kesabaran dan kehati-hatian saat melintas di lokasi tersebut.<br><br>Terima kasih atas laporannya, mari kita jaga bersama infrastruktur kita. #SlemanMajuBersama"`,
-          'sampah': `📌 <strong>Script Video Respon Sampah Menumpuk</strong><br><br>"Halo warga Sleman,<br><br>Kami mencatat keluhan tentang penumpukan sampah di area Depok. Tim kebersihan telah diarahkan untuk segera menangani hal ini. Kami juga mengingatkan jadwal pengangkutan sampah rutin setiap hari Senin, Rabu, dan Jumat.<br><br>Mari kita jaga kebersihan bersama. Terima kasih atas laporannya! #SlemanBersih"`,
-          'fasilitas-umum': `📌 <strong>Script Video Respon Fasilitas Umum</strong><br><br>"Perhatian warga Sleman,<br><br>Kami menerima laporan kerusakan fasilitas umum di area Sleman Kota. Tim teknis akan segera melakukan pengecekan dan perbaikan. Mohon melaporkan jika ada fasilitas lain yang membutuhkan perhatian.<br><br>Terima kasih atas perhatiannya. #SlemanNyaman"`,
-          'pelayanan': `📌 <strong>Script Video Respon Pelayanan Kesehatan</strong><br><br>"Kepada warga Sleman yang terhormat,<br><br>Kami mencatat keluhan tentang pelayanan kesehatan di wilayah Tempel. Kami akan melakukan evaluasi dan peningkatan kualitas layanan. Jika ada keluhan lebih lanjut, silakan hubungi hotline kami di 1500-123.<br><br>Terima kasih atas masukan yang membangun. #SlemanSehat"`,
-          'perizinan': `📌 <strong>Script Video Panduan Perizinan</strong><br><br>"Halo pelaku usaha di Sleman,<br><br>Kami memahami kendala dalam proses perizinan. Berikut panduan singkatnya:<br>1. Kunjungi Dinas Penanaman Modal dan PTSP<br>2. Bawa dokumen lengkap (KTP, NPWP, dll)<br>3. Proses verifikasi maksimal 3 hari kerja<br><br>Info lebih lanjut kunjungi sleman.go.id/perizinan<br>#SlemanMajuUMKMnya"`,
-          'infrastruktur': `📌 <strong>Script Video Respon Infrastruktur</strong><br><br>"Kepada warga Gamping yang budiman,<br><br>Kami mencatat laporan tentang kondisi infrastruktur di wilayah Anda. Laporan ini akan masuk dalam prioritas perbaikan kuartal ini. Perbaikan akan dilaksanakan secara bertahap menyesuaikan dengan anggaran yang tersedia.<br><br>Terima kasih atas pengertiannya. #SlemanMaju"`
-        };
-
-        if (problemSelect && aiResult) {
-          const selectedProblem = problemSelect.value;
-          aiResult.innerHTML = problems[selectedProblem] || 'Pilih masalah terlebih dahulu.';
-        }
-      }
-    </script>
-    <script src="js/issue-management.js"></script>
-  </body>
 </html>
