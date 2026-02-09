@@ -25,6 +25,178 @@
       <div class="logo-text">
         <div style="font-size: 1.2rem; font-weight: 800; line-height: 1.1">
           PEMKAB<br />SLEMAN
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleman Smart Regency - Command Center</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Gaya untuk daftar pesan */
+      .admin-message-list {
+        max-height: 500px;
+        overflow-y: auto;
+        padding-right: 8px;
+      }
+
+      .message-item {
+        background: white;
+        border-radius: 8px;
+        padding: 12px 15px;
+        margin-bottom: 12px;
+        border-left: 4px solid #e5e7eb;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      }
+
+      .message-item:hover {
+        transform: translateX(4px);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+
+      .message-item.active {
+        border-left-color: #3b82f6;
+        background-color: #f8fafc;
+      }
+
+      .message-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        align-items: center;
+      }
+
+      .message-platform {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #4b5563;
+        background: #f3f4f6;
+        padding: 2px 8px;
+        border-radius: 12px;
+      }
+
+      .message-priority {
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 12px;
+      }
+
+      .message-priority.high {
+        background-color: #fee2e2;
+        color: #dc2626;
+      }
+
+      .message-priority.medium {
+        background-color: #fef3c7;
+        color: #d97706;
+      }
+
+      .message-priority.low {
+        background-color: #dcfce7;
+        color: #16a34a;
+      }
+
+      .message-content {
+        font-weight: 500;
+        margin: 8px 0;
+        color: #1f2937;
+      }
+
+      .message-meta {
+        display: flex;
+        gap: 12px;
+        font-size: 0.75rem;
+        color: #6b7280;
+      }
+
+      .message-admin-note {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f0f9ff;
+        border-radius: 6px;
+        border-right: 3px solid #0ea5e9;
+        font-size: 0.85rem;
+        color: #0369a1;
+      }
+
+      /* Scrollbar styling */
+      .admin-message-list::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .admin-message-list::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      .admin-message-list::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+      }
+
+      .admin-message-list::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+    </style>
+    <link rel="icon" href="assets/logo.jpg" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      crossorigin=""
+    ></script>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside>
+      <div class="logo">
+        <img src="assets/logo.jpg" alt="PemKab Sleman Logo" />
+        <div class="logo-text">
+          <div style="font-size: 1.2rem; font-weight: 800; line-height: 1.1">
+            PEMKAB<br />SLEMAN
+          </div>
+          <div style="font-size: 0.9rem; font-weight: 400; color: #e0f2fe">
+            Command Center
+          </div>
+        </div>
+      </div>
+
+      <nav id="admin-nav">
+        <div class="nav-item active" onclick="switchView('dashboard')">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Situation Room</span>
+        </div>
+        
+        <div class="nav-item" onclick="switchView('warning')">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Early Warning</span>
+        </div>
+        
+        <div class="nav-item" onclick="switchView('issues')">
+          <i class="fa-solid fa-tasks"></i>
+          <span>Manajemen Isu</span>
+        </div>
+        
+        <div class="nav-item" onclick="switchView('optimizer')">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span>Public Comm. AI</span>
+        </div>
+        <div class="nav-item" onclick="switchView('accounts')">
+          <i class="fa-brands fa-tiktok"></i>
+          <span>KOL Watchlist</span>
+        </div>
+        <div class="nav-item" onclick="switchView('reports')">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span>Executive Reports</span>
         </div>
         <div style="font-size: 0.9rem; font-weight: 400; color: #e0f2fe">
           Command Center
@@ -581,6 +753,17 @@ Segera cek lapangan di RSUD Sleman. Koordinasi dengan Direktur RSUD untuk penamb
                   " style="width: 100%; padding: 10px">
                 <i class="fa-solid fa-paper-plane"></i> Kirim Instruksi
               </button>
+            </div>
+
+            <!-- Escalation Status Tracking (Separate Section) -->
+            <div id="escalationTracking" style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; display: none;">
+              <h4 style="font-size: 1.1rem; margin-bottom: 20px; color: #1a1a1a;">
+                <i class="fa-solid fa-clock"></i> Escalation Status Tracking
+              </h4>
+              
+              <div id="activeEscalations" style="display: flex; flex-direction: column; gap: 15px;">
+                <!-- Escalation cards will be inserted here -->
+              </div>
             </div>
           </div>
         </div>
